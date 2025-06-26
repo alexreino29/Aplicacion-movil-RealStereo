@@ -1,0 +1,84 @@
+<div id="app">
+  <div class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-900 p-10 md:p-16 rounded-lg shadow-lg">
+    <div class="container mx-auto text-center">
+
+      <!-- TÍTULO SIMPLE EN UNA LÍNEA HORIZONTAL -->
+      <h1 class="horizontal-title">🎧 Real Stereo Sahagún</h1>
+
+      <p class="text-lg md:text-xl mb-6 font-light">
+        Tu música, tu estilo. Escucha lo mejor de la radio online.
+      </p>
+
+      <!-- SI ESTÁ CARGANDO: Solo mostrar loading, NADA MÁS -->
+      <div *ngIf="isLoading">
+        <div class="fixed inset-0 flex flex-col items-center justify-center bg-gray-900 bg-opacity-95 text-white z-50">
+          <i class="fas fa-spinner fa-spin text-6xl mb-4"></i>
+          <p class="text-xl font-bold mb-2">Cargando transmisión...</p>
+          <p class="text-lg">Por favor espera mientras nos conectamos</p>
+        </div>
+      </div>
+
+      <!-- SI NO ESTÁ CARGANDO: Mostrar toda la interfaz -->
+      <div *ngIf="!isLoading">
+
+        <!-- Indicador de estado dinámico -->
+        <div class="live-indicator-container">
+          <div class="live-indicator" [ngClass]="{
+            'bg-red-500': isPlaying,
+            'bg-gray-500': !isPlaying
+          }">
+            <span class="live-dot" [ngClass]="{
+              'animate-ping': isPlaying
+            }"></span>
+            <span *ngIf="isPlaying">🔴 EN VIVO</span>
+            <span *ngIf="!isPlaying">⏸️ DETENIDO</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full md:w-2/3 mx-auto">
+          <div class="buttons-container">
+            <button (click)="play()"
+                    [ngClass]="{
+                      'play-btn': !isPlaying,
+                      'playing-btn': isPlaying
+                    }"
+                    [disabled]="isPlaying">
+              <i class="fas fa-play-circle text-2xl"></i>
+              <span *ngIf="!isPlaying">Escuchar En Vivo</span>
+              <span *ngIf="isPlaying">Reproduciendo</span>
+            </button>
+            <button (click)="stop()"
+                    [ngClass]="{
+                      'stop-btn': !isPlaying,
+                      'stopping-btn': isPlaying
+                    }"
+                    [disabled]="!isPlaying">
+              <i class="fas fa-stop-circle text-2xl"></i>
+              <span *ngIf="isPlaying">Detener</span>
+              <span *ngIf="!isPlaying">Detenido</span>
+            </button>
+          </div>
+
+          <!-- Animación de ondas de sonido -->
+          <div class="sound-wave-container">
+            <div *ngIf="isPlaying" class="sound-wave">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div *ngIf="!isPlaying" class="text-center">
+              <p class="text-sm text-gray-600">Presiona "Escuchar En Vivo"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="marquee-container">
+          <p class="marquee-text">
+            🎶 Bienvenidos a Real Stereo en Sahagún Córdoba, Colombia.
+            <span *ngIf="isPlaying">🔴 Transmisión en vivo desde Sahagún</span>
+            <span *ngIf="!isPlaying">📻 Listo para transmitir</span> 🎶
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

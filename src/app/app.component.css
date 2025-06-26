@@ -1,0 +1,13 @@
+/* Animación del logo */
+.navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+  transform: rotate(360deg);
+}
+
+/* Sombra del navbar */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
