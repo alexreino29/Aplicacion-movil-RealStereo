@@ -2,6 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
+  <!-- ID de publicidad -->
+  <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+  <!-- Permisos necesarios -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <!-- ❓ Solo si usas ventanas flotantes como alertas personalizadas -->
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+  <!-- Hardware necesario -->
+  <uses-feature android:name="android.hardware.audio.output" android:required="true" />
+
+  <!-- Forzar eliminación de permisos innecesarios -->
+  <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" tools:node="remove" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" tools:node="remove" />
+
   <application
     android:usesCleartextTraffic="true"
     android:hardwareAccelerated="true"
@@ -13,7 +36,7 @@
     android:theme="@style/AppTheme"
     android:requestLegacyExternalStorage="true">
 
-    <!-- ✅ SplashActivity como actividad principal -->
+    <!-- SplashActivity como actividad principal -->
     <activity
       android:name=".SplashActivity"
       android:theme="@style/SplashTheme"
@@ -25,7 +48,7 @@
       </intent-filter>
     </activity>
 
-    <!-- ✅ MainActivity (ya no inicia directamente) -->
+    <!-- MainActivity -->
     <activity
       android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation"
       android:name=".MainActivity"
@@ -33,15 +56,12 @@
       android:theme="@style/AppTheme.NoActionBarLaunch"
       android:launchMode="singleTask"
       android:exported="true">
-
-      <!-- Botón multimedia -->
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
-
     </activity>
 
-    <!-- Servicio en segundo plano -->
+    <!-- Servicio en segundo plano para audio -->
     <service
       android:name=".AudioService"
       android:enabled="true"
@@ -60,19 +80,5 @@
     </provider>
 
   </application>
-
-  <!-- Permisos -->
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-  <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-  <!-- Hardware necesario -->
-  <uses-feature android:name="android.hardware.audio.output" android:required="true" />
 
 </manifest>
